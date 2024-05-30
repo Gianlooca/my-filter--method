@@ -21,6 +21,16 @@ const people = [
   },
 ];
 
+const grownPerson = people.filter(person => person.age >= 21);
+console.log(grownPerson);
+
+// Here we appended the [0] to the end of the callback function in order to have access
+// directly to the object itself, instead of having an array containing (in this case) just an object.
+/// This happens because the filter() method always returns an array, even if it's an array
+// of a single element, as in this case would have been
+const paul = people.filter(p => p.name === 'Paul')[0];
+console.log(paul);
+
 
 // Complex Filtering
 const students = [
@@ -55,3 +65,10 @@ const students = [
     ]
   },
 ];
+
+const candidates = students.filter(student => {
+  let strongSkills = student.skills.filter(skill => skill.yrsExperience >= 5);
+  return strongSkills.length > 0;
+});
+
+console.log(candidates);
