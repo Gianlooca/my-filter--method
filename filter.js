@@ -66,9 +66,22 @@ const students = [
   },
 ];
 
-const candidates = students.filter(student => {
-  let strongSkills = student.skills.filter(skill => skill.yrsExperience >= 5);
-  return strongSkills.length > 0;
-});
+// Below we can see how complex can be a callback function. In cases like this one,
+// it would be better to isolate the callback function and associating it to a variable,
+// in order for it to be easily reused and making the general code more readable and
+// your intention, as a coder, clear.
+
+// const candidates = students.filter(student => {
+//   let strongSkills = student.skills.filter(skill => skill.yrsExperience >= 5);
+//   return strongSkills.length > 0;
+// });
+
+const has5YearsExp = skill => skill.yrsExperience >= 5;
+const hasStrongSkills = student => student.skills.filter(has5YearsExp).length > 0;
+const candidates = students.filter(hasStrongSkills);
+
+// This is to have just the names of the right candidates. We use the map() method
+const names = candidates.map(cand => [cand.name]);
 
 console.log(candidates);
+console.log(names);
